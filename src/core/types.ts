@@ -22,4 +22,5 @@ export interface Dynamics {
     y: number;
     dx: number;
     dy: number;
+    friction: number;
 }

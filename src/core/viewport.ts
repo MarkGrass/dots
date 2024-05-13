@@ -26,6 +26,7 @@ export class Viewport {
         this.run = this.run.bind(this);
         this.poiterPosition = this.poiterPosition.bind(this);
         this.freeze = this.freeze.bind(this);
+        this.drop = this.drop.bind(this);
 
         this.init();
         this.interaction();
@@ -61,7 +62,9 @@ export class Viewport {
             } else {
                 circle.scaleDown();
             }
-            circle.update();
+
+            circle.move();
+            circle.draw();
         }
     }
 
@@ -75,6 +78,19 @@ export class Viewport {
 
     private freeze(): void {
         cancelAnimationFrame(this.moveAnimation);
+        for (const circle of this.circles) {
+            circle.freeze();
+        }
+    }
+
+    private drop(): void {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.moveAnimation = requestAnimationFrame(this.drop);
+
+        for (const circle of this.circles) {
+            circle.drop();
+            circle.draw();
+        }
     }
 
     private interaction(): void {
@@ -84,6 +100,6 @@ export class Viewport {
 
         this.canvas.addEventListener('mousemove', this.poiterPosition);
         this.canvas.addEventListener('mousedown', this.freeze);
-        this.canvas.addEventListener('mouseup', this.run);
+        this.canvas.addEventListener('mouseup', this.drop);
     }
 }

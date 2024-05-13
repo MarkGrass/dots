@@ -40,6 +40,7 @@ export class Circle extends Phys {
         };
 
         this.entity = {
+            friction: randomFromRange(6, 9) / 10,
             width: radius || defaultRadius,
             height: radius || defaultRadius,
             x: x ?? defaultX,
@@ -56,8 +57,6 @@ export class Circle extends Phys {
             maxWidth: this.MAX_RADIUS * 2,
             maxHeight: this.MAX_RADIUS * 2,
         };
-
-        this.update = this.update.bind(this);
     }
 
     draw() {
@@ -73,10 +72,5 @@ export class Circle extends Phys {
         this.context.fillStyle = this.color;
         this.context.fill();
         this.context.closePath();
-    }
-
-    update() {
-        this.move();
-        this.draw();
     }
 }
