@@ -1,0 +1,6 @@
+@import url("./styles/variables.css");
+@import url("./styles/reset.css");
+
+#app {
+    height: 100vh;
+}

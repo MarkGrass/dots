@@ -1,0 +1,95 @@
+{
+    "root": true,
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "ignorePatterns": ["projects/**/*", "node_modules/**/*"],
+    "overrides": [
+        {
+            "files": ["*.ts"],
+            "extends": [
+                "eslint:recommended",
+                "plugin:@typescript-eslint/recommended",
+                "plugin:import/typescript"
+            ],
+            "plugins": [
+                "prettier",
+                "import",
+                "unused-imports",
+                "@typescript-eslint"
+            ],
+            "parser": "@typescript-eslint/parser",
+            "parserOptions": {
+                "ecmaVersion": "latest",
+                "sourceType": "module"
+            },
+            "rules": {
+                "prettier/prettier": "error",
+                "@typescript-eslint/no-explicit-any": [ "error" ],
+                "@typescript-eslint/explicit-member-accessibility": [
+                    "error",
+                    {
+                        "accessibility": "no-public"
+                    }
+                ],
+                "no-unused-vars": "off",
+                "unused-imports/no-unused-imports": "error",
+                "unused-imports/no-unused-vars": [
+                    "warn",
+                    { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+                ],
+                "no-prototype-builtins": "warn",
+                "import/no-unresolved": 0,
+                "import/namespace": 0,
+                "import/named": 0,
+                "import/order": [
+                    "error",
+                    {
+                        "newlines-between": "always",
+                        "groups": [
+                            "internal",
+                            "unknown",
+                            "external",
+                            "builtin",
+                            ["parent", "sibling", "index"]
+                        ],
+                        "pathGroups": [
+                            {
+                                "pattern": "rxjs",
+                                "group": "unknown"
+                            },
+                            {
+                                "pattern": "rxjs/**",
+                                "group": "unknown"
+                            },
+                            {
+                                "pattern": "@internal-library",
+                                "group": "builtin"
+                            }
+                        ],
+                        "pathGroupsExcludedImportTypes": ["type", "object"]
+                    }
+                ]
+            },
+            "settings": {
+                "import/internal-regex": "@angular",
+                "import/external-module-folders": ["node_modules"],
+                "import/parsers": {
+                    "@typescript-eslint/parser": [".ts"]
+                },
+                "import/resolver": {
+                    "eslint-import-resolver-custom-alias": {
+                        "alias": {
+                            "src": "./src"
+                        },
+                        "extensions": [".ts", ".js"],
+                        "packages": [
+                            "packages/*"
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}
